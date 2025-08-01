@@ -36,3 +36,78 @@
     transform: rotate(360deg);
   }
 }
+
+
+ /* Container toggle */
+.show {
+  display: none;
+}
+.show.active {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6); /* dark transparent background */
+  backdrop-filter: blur(6px);
+}
+
+/* Centered login box */
+.login-form {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.form-box.solid {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-text {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Input field styling */
+.login-box {
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.login-box:focus {
+  border-color: rgb(48, 172, 251);
+}
+
+/* Button styles inherited from component props */
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
