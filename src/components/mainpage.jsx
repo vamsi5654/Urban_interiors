@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import LoginForm from './LoginForm';
-import Portfolio from './Portfolio';
+//import Portfolio from './Portfolio';
 import UrbanPortfolio from './Urbannportfolio';
+import Services from './Services';
 
 
 // Header Component
@@ -754,7 +755,7 @@ const HeroSection = () => {
     </section>
 
       {/*services section*/}
-      <Services />
+      <Services/>
 
       {/* Portfolio Section */}
       <section id="portfolio" className="portfolio">
@@ -842,309 +843,26 @@ const HeroSection = () => {
 };
 
 
-//services 
-
-const Services = () => {
-  const services = [
-    {
-      title: 'Residential Design',
-      subtitle: 'Transform your home into a personalized sanctuary',
-      description: 'Start your home transformation journey with us. Visit our design studios and explore our comprehensive residential range.',
-      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      gradient: 'linear-gradient(135deg, rgba(44, 62, 80, 0.8), rgba(52, 73, 94, 0.6))'
-    },
-    {
-      title: 'Commercial Spaces',
-      subtitle: 'Professional environments that inspire productivity',
-      description: 'Transform your office into a masterpiece. Our commercial solutions blend smart design with professional elegance— where functionality meets luxury.',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      gradient: 'linear-gradient(135deg, rgba(41, 128, 185, 0.8), rgba(52, 152, 219, 0.6))'
-    },
-    {
-      title: 'Renovations',
-      subtitle: 'Breathe new life into existing spaces',
-      description: 'Bring beauty and innovation to your space with renovations crafted just for you. Designed with precision, built with care.',
-      image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      gradient: 'linear-gradient(135deg, rgba(142, 68, 173, 0.8), rgba(155, 89, 182, 0.6))'
-    }
-  ];
-
-  return (
-    <section style={{
-      padding: '5rem 2rem',
-      backgroundColor: '#f8f9fa'
-    }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <h2 style={{
-          fontSize: '3rem',
-          textAlign: 'center',
-          marginBottom: '4rem',
-          color: '#2c3e50',
-          fontWeight: '700'
-        }}>
-          Our Services
-        </h2>
-        
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-          gap: '2rem',
-          marginBottom: '3rem'
-        }}>
-          {services.map((service, index) => (
-            <div 
-              key={index}
-              style={{
-                position: 'relative',
-                height: '500px',
-                borderRadius: '15px',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                display: 'flex',
-                alignItems: 'flex-end'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-10px)';
-                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-              }}
-            >
-              {/* Background Image */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundImage: `url(${service.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                transition: 'transform 0.3s ease'
-              }} />
-              
-              {/* Gradient Overlay - positioned at bottom left, 75% width, 70% height */}
-              <div style={{
-                position: 'absolute',
-                height: '70%',
-                width: '75%',
-                bottom: 0,
-                left: 0,
-                background: service.gradient,
-                borderRadius: '0 15px 0 15px'
-              }} />
-              
-              {/* Content - positioned within the overlay area */}
-              <div style={{
-                position: 'absolute',
-                height: '70%',
-                width: '75%',
-                bottom: 0,
-                left: 0,
-                padding: '1.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                color: 'white',
-                zIndex: 2,
-                boxSizing: 'border-box'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-start',
-                  paddingTop: '1rem'
-                }}>
-                  <h3 style={{
-                    fontSize: '1.8rem',
-                    fontWeight: '600',
-                    marginBottom: '0.8rem',
-                    lineHeight: '1.2',
-                    wordWrap: 'break-word',
-                    maxWidth: '100%'
-                  }}>
-                    {service.title}
-                  </h3>
-                  
-                  <p style={{
-                    fontSize: '1rem',
-                    fontWeight: '300',
-                    marginBottom: '1rem',
-                    opacity: 0.9,
-                    lineHeight: '1.4',
-                    wordWrap: 'break-word',
-                    maxWidth: '100%'
-                  }}>
-                    {service.subtitle}
-                  </p>
-                  
-                  <p style={{
-                    fontSize: '0.85rem',
-                    lineHeight: '1.4',
-                    opacity: 0.8,
-                    marginBottom: '1rem',
-                    wordWrap: 'break-word',
-                    maxWidth: '100%',
-                    overflow: 'hidden',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 4,
-                    WebkitBoxOrient: 'vertical'
-                  }}>
-                    {service.description}
-                  </p>
-                </div>
-                
-                <button style={{
-                  alignSelf: 'flex-start',
-                  padding: '0.7rem 1.3rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                  color: 'white',
-                  border: '2px solid rgba(255, 255, 255, 0.3)',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  fontWeight: '400',
-                  backdropFilter: 'blur(10px)',
-                  fontSize: '0.9rem',
-                  marginBottom: '0.5rem'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                }}
-                >
-                  Explore More
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Additional Services Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '1.5rem'
-        }}>
-          {[
-            {
-              title: '3D Visualization',
-              description: 'See your space before it becomes reality',
-              icon: '📐',
-              color: '#e74c3c'
-            },
-            {
-              title: 'Furniture Selection',
-              description: 'Curated pieces that complete your vision',
-              icon: '🛋️',
-              color: '#f39c12'
-            },
-            {
-              title: 'Color Consultation',
-              description: 'Perfect palettes for every mood and style',
-              icon: '🎨',
-              color: '#9b59b6'
-            }
-          ].map((service, index) => (
-            <div key={index} style={{
-              backgroundColor: 'white',
-              padding: '2rem',
-              borderRadius: '12px',
-              boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
-              textAlign: 'center',
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.boxShadow = '0 15px 30px rgba(0,0,0,0.2)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-            }}
-            >
-              <div style={{ 
-                fontSize: '3rem', 
-                marginBottom: '1rem',
-                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
-              }}>
-                {service.icon}
-              </div>
-              <h3 style={{
-                fontSize: '1.3rem',
-                marginBottom: '1rem',
-                color: '#2c3e50',
-                fontWeight: '600'
-              }}>
-                {service.title}
-              </h3>
-              <p style={{
-                color: '#7f8c8d',
-                marginBottom: '1.5rem',
-                lineHeight: '1.5'
-              }}>
-                {service.description}
-              </p>
-              <button style={{
-                padding: '0.8rem 1.5rem',
-                backgroundColor: service.color,
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                fontWeight: '500'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-              >
-                Learn More
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-
-
 // About Component
 const About = () => {
   const teamMembers = [
     {
-      name: 'Gana',
-      role: 'Lead Designer',
-      bio: 'With years of experience in luxury interior design, Sarah brings creativity and precision to every project.',
-      image: 'https://img.freepik.com/free-vector/blank-brown-notepaper-design-vector_53876-173620.jpg?t=st=1752701727~exp=1752705327~hmac=6ad5bd7747900792ac710c06bfc8034c46798dcb6e5816c42416f21f60b0be6d&w=1380'
+      name: 'Design Team',
+      role: 'Creative Designers',
+      bio: 'Our talented design team specializes in creating innovative interior concepts, space planning, and aesthetic solutions that transform your vision into stunning reality.',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&h=300&fit=crop&crop=face'
     },
     {
-      name: 'Katty',
-      role: '3D Visualization Specialist',
-      bio: 'Michael transforms concepts into stunning 3D visualizations, helping clients see their dreams before they become reality.',
-      image: 'https://wallpapers.com/images/high/solid-color-background-ex7nkbdbhg9aejlf.webp'
+      name: 'Construction Team',
+      role: 'Skilled Craftsmen',
+      bio: 'Our expert construction team includes carpenters, electricians, painters, plumbers, and other skilled tradesmen who bring precision and quality to every aspect of your project.',
+      image: 'https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=300&h=300&fit=crop'
     },
     {
-      name: 'Ravi varma',
-      role: 'Project Manager',
-      bio: 'Emily ensures every project runs smoothly from concept to completion, maintaining our high standards of quality.',
-      image: 'https://wallpapers.com/images/high/solid-color-background-fxoacl3x7q71aosp.webp'
+      name: 'Supervision Team',
+      role: 'Project Supervisors',
+      bio: 'Our experienced supervision team ensures quality workmanship, timely project completion, and seamless coordination between all trades for exceptional results.',
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop'
     }
   ];
 
@@ -1175,7 +893,7 @@ const About = () => {
             color: '#7f8c8d',
             marginBottom: '2rem'
           }}>
-            At Luxe Interiors, we believe that every space has the potential to inspire and transform lives. 
+            At Urbenn Interiors, we believe that every space has the potential to inspire and transform lives. 
             Our mission is to create beautiful, functional environments that reflect your unique personality and lifestyle.
           </p>
           <p style={{
@@ -2019,7 +1737,7 @@ const Appss = () => {
       case 'About':
         return <About />;
       case 'Services':
-        return <Services />;
+        return <Services/>;
       case 'Portfolio':
         return <UrbanPortfolio />;
       case 'Testimonials':
