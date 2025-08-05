@@ -8,6 +8,7 @@ import { db } from "./firebase";
 import { collection, addDoc, Timestamp, onSnapshot, query, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import ReviewUploadForm from './ReviewUploadForm';
 import VideoUploadForm from './VideoUploadForm';
+import LeadManagement from './LeadManagement';
 
 
 // Mock data for demonstration
@@ -1667,15 +1668,20 @@ const ImageManagementSystem = () => {
               <span style={{ fontSize: '14px', color: '#6b7280' }}>
                 {customers.length} Customer{customers.length !== 1 ? 's' : ''}
               </span>
-              <Button variant="secondary" onClick={handleLogout}>
-                Logout
+              <Button variant="primary" onClick={() => setCurrentView("lead-management")}>
+                📋 Manage Leads
               </Button>
+              
               <Button variant="primary" onClick={() => setCurrentView("upload-text-review")}>
                 📝 Upload Review
               </Button>
 
               <Button variant="primary" onClick={() => setCurrentView("upload-video-review")}>
                 📹 Upload Video
+              </Button>
+
+              <Button variant="secondary" onClick={handleLogout}>
+                Logout
               </Button>
 
             </div>
@@ -1925,6 +1931,15 @@ const ImageManagementSystem = () => {
             <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px' }}>
               <h2>Upload Customer Video Review</h2>
               <VideoUploadForm />
+              <Button onClick={goToDashboard} variant="secondary" style={{ marginTop: '12px' }}>
+                ← Back to Dashboard
+              </Button>
+            </div>
+          )}
+
+          {currentView === 'lead-management' && (
+            <div>
+              <LeadManagement />
               <Button onClick={goToDashboard} variant="secondary" style={{ marginTop: '12px' }}>
                 ← Back to Dashboard
               </Button>

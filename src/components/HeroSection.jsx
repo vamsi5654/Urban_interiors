@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebase';
 import { collection, onSnapshot, query } from "firebase/firestore";
+import { addDoc, Timestamp } from "firebase/firestore";
 import Services from './Services';
 import Testimonials from './Testimonials';  
 
@@ -337,10 +338,34 @@ const HeroSection = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
-  };
+  const handleSubmit = async () => {
+  try {
+    const leadData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      mobile: formData.mobile,
+      pinCode: formData.pinCode,
+      whatsappUpdates: formData.whatsappUpdates,
+      status: 'new',
+      createdAt: Timestamp.now()
+    };
+
+    await addDoc(collection(db, "leads"), leadData);
+    alert("Thank you! We'll get back to you soon.");
+    
+    // Reset form
+    setFormData({
+      fullName: '',
+      email: '',
+      mobile: '',
+      pinCode: '',
+      whatsappUpdates: true
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert("Sorry, there was an error. Please try again.");
+  }
+};
 
   // Function to get category images from all customers
   const getCategoryImages = (categoryKey) => {
