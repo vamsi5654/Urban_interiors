@@ -50,7 +50,7 @@ export const Services = () => {
       subtitle: 'Breathe new life into existing spaces',
       description: 'Bring beauty and innovation to your space with renovations crafted just for you. Designed with precision, built with care.',
       image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      gradient: 'linear-gradient(135deg, rgba(200, 198, 215, 0.85), rgba(255, 255, 255, 0.65))',
+      gradient: 'linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.65))',
       detailedContent: {
         fullDescription: 'Transform outdated spaces into modern, functional areas that meet today\'s lifestyle demands. Our renovation services cover everything from minor updates to complete space makeovers.',
         features: [

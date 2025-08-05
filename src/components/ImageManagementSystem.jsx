@@ -6,6 +6,9 @@ import { auth } from '../components/firebase';
 import { useNavigate } from "react-router-dom";
 import { db } from "./firebase";
 import { collection, addDoc, Timestamp, onSnapshot, query, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import ReviewUploadForm from './ReviewUploadForm';
+import VideoUploadForm from './VideoUploadForm';
+
 
 // Mock data for demonstration
 const mockCustomers = [];
@@ -13,13 +16,13 @@ const mockCustomers = [];
 const roomTypes = [
   { key: 'bedroom', label: 'Bedroom' },
   { key: 'kitchen', label: 'Kitchen' },
-  { key: 'poojaRoom', label: 'Pooja Room' },
-  { key: 'livingRoom', label: 'Living Room' },
+  { key: 'poojaroom', label: 'Pooja Room' },
+  { key: 'livingroom', label: 'Living Room' },
   { key: 'bathroom', label: 'Bathroom' },
   { key: 'diningRoom', label: 'Dining Room' },
   { key: 'balcony', label: 'Balcony' },
   { key: 'gym', label: 'Gym' },
-  { key: 'playArea', label: 'Play Area' },
+  { key: 'playarea', label: 'Play Area' },
   { key: 'garden', label: 'Garden' },
   { key: 'entranceImage', label: 'Entrance Image' },
 ];
@@ -1364,10 +1367,20 @@ const CategoryGallery = ({ category, allCustomers, onBack }) => {
   const [viewerOpen, setViewerOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
+  // Debug: Log the category and room types
+  console.log('Selected category:', category);
+  console.log('Available room types:', roomTypes);
+  
+  const categoryKey = roomTypes.find(r => r.label === category)?.key;
+  console.log('Found category key:', categoryKey);
+  
   const allCategoryImages = [];
+  
   allCustomers.forEach(customer => {
-    const categoryKey = roomTypes.find(r => r.label === category)?.key;
+    console.log(`Customer: ${customer.name}, Rooms:`, Object.keys(customer.rooms || {}));
+    
     if (categoryKey && customer.rooms && customer.rooms[categoryKey]) {
+      console.log(`Found ${customer.rooms[categoryKey].length} images for ${customer.name} in ${category}`);
       customer.rooms[categoryKey].forEach(image => {
         allCategoryImages.push({
           ...image,
@@ -1377,6 +1390,8 @@ const CategoryGallery = ({ category, allCustomers, onBack }) => {
       });
     }
   });
+
+  console.log('Total category images found:', allCategoryImages.length);
 
   const openViewer = (index) => {
     setCurrentImageIndex(index);
@@ -1406,8 +1421,35 @@ const CategoryGallery = ({ category, allCustomers, onBack }) => {
             <p style={{ margin: '4px 0 0 0', color: '#6b7280', fontSize: '14px' }}>
               {allCategoryImages.length} image(s) across all customers
             </p>
+            {/* Debug info */}
+            <p style={{ margin: '4px 0 0 0', color: '#ef4444', fontSize: '12px' }}>
+              Debug: Looking for key "{categoryKey}" in customer rooms
+            </p>
           </div>
         </div>
+      </div>
+
+      {/* Debug section - Remove this after fixing */}
+      <div style={{
+        backgroundColor: '#fef2f2',
+        border: '1px solid #fecaca',
+        borderRadius: '8px',
+        padding: '16px',
+        marginBottom: '20px'
+      }}>
+        <h4 style={{ margin: '0 0 12px 0', color: '#dc2626' }}>Debug Information:</h4>
+        <p style={{ margin: '4px 0', fontSize: '14px' }}>Category: {category}</p>
+        <p style={{ margin: '4px 0', fontSize: '14px' }}>Category Key: {categoryKey || 'NOT FOUND'}</p>
+        <p style={{ margin: '4px 0', fontSize: '14px' }}>Total Customers: {allCustomers.length}</p>
+        
+        <details style={{ marginTop: '12px' }}>
+          <summary style={{ cursor: 'pointer', fontWeight: '500' }}>Customer Room Keys</summary>
+          {allCustomers.map(customer => (
+            <div key={customer.id} style={{ margin: '8px 0', fontSize: '12px' }}>
+              <strong>{customer.name}:</strong> {Object.keys(customer.rooms || {}).join(', ') || 'No rooms'}
+            </div>
+          ))}
+        </details>
       </div>
 
       {allCategoryImages.length === 0 ? (
@@ -1595,6 +1637,9 @@ const ImageManagementSystem = () => {
   };
 
   return (
+
+    
+
     <div style={{
       minHeight: '100vh',
       backgroundColor: '#f3f4f6',
@@ -1625,6 +1670,14 @@ const ImageManagementSystem = () => {
               <Button variant="secondary" onClick={handleLogout}>
                 Logout
               </Button>
+              <Button variant="primary" onClick={() => setCurrentView("upload-text-review")}>
+                📝 Upload Review
+              </Button>
+
+              <Button variant="primary" onClick={() => setCurrentView("upload-video-review")}>
+                📹 Upload Video
+              </Button>
+
             </div>
           </div>
         </header>
@@ -1857,6 +1910,26 @@ const ImageManagementSystem = () => {
             onBack={goToDashboard}
           />
         )}
+
+        {currentView === 'upload-text-review' && (
+            <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px' }}>
+              <h2>Upload Customer Review</h2>
+              <ReviewUploadForm />
+              <Button onClick={goToDashboard} variant="secondary" style={{ marginTop: '12px' }}>
+                ← Back to Dashboard
+              </Button>
+            </div>
+          )}
+
+          {currentView === 'upload-video-review' && (
+            <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px' }}>
+              <h2>Upload Customer Video Review</h2>
+              <VideoUploadForm />
+              <Button onClick={goToDashboard} variant="secondary" style={{ marginTop: '12px' }}>
+                ← Back to Dashboard
+              </Button>
+            </div>
+          )}
       </div>
     </div>
   );
